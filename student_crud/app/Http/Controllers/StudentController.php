@@ -59,7 +59,7 @@ class StudentController extends Controller
         $studentObj->save();
 
         return redirect()
-                        ->route('student.create')                  // Redirecting to a template (can be different from calling template)
+                        ->route('student.index')                  // Redirecting to a template (can be different from calling template)
                         ->with('success', 'Data Added successfully'); // like model interface, carrying key-value
     }
 
@@ -83,6 +83,9 @@ class StudentController extends Controller
     public function edit($id)
     {
         //
+        $studentWithId = Student::find($id);
+
+        return view('student.edit', compact('studentWithId', 'id'));
     }
 
     /**
@@ -94,7 +97,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Giving validation to the fields in th form(form that calls this method)
+        $this->validate($request, [
+            'firstName' => 'required',
+            'lastName' => 'required'
+        ]);
+        $studentWithId = Student::find($id);
+
+        $studentWithId['first_name'] = $request->get('firstName');
+        $studentWithId['last_name'] = $request->get('lastName');
+
+        $studentWithId->save();
+
+        return redirect()
+                        ->route('student.index')
+                        ->with('success', 'Updated Successfully');
     }
 
     /**
@@ -106,5 +123,10 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
+        Student::destroy($id);
+
+        return redirect()
+            ->route('student.index')
+            ->with('success', 'Deleted successfully');
     }
 }
