@@ -43,7 +43,7 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel_testing'),
+            'database' => env('DB_DATABASE', 'ezepay'),
             'username' => env('DB_USERNAME', 'phproot'),
             'password' => env('DB_PASSWORD', '123456'),
             'unix_socket' => env('DB_SOCKET', ''),

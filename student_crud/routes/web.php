@@ -17,3 +17,5 @@ Route::get('/', function () {
 
 Route::resource('student', 'StudentController');  // calls create() in StudentController as default
                                                     // To call a specific method, should mention StudentController@method_name
+
+Route::resource('transactions', 'TransactionController');
